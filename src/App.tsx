@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 import './App.css'
-import Home from './pages/Home'
-import Host from './pages/Host'
-import Connect from './pages/Connect'
-import Game from './pages/Game'
-import Result from './pages/Result'
-import Table from './pages/Table'
+import Home from './pages/Home/Home'
+import Host from './pages/Host/Host'
+import Connect from './pages/Connect/Connect'
+import Game from './pages/Game/Game'
+import Result from './pages/Result/Result'
+import Table from './pages/Table/Table'
 
 const screens = [
   { id: 'home', title: 'Home', Component: Home },
