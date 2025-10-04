@@ -2,8 +2,7 @@ import HalfCircleBtn from "../../components/HalfCircleBtn/HalfCircleBtn";
 import RedActiveBtn from "../../components/RedActiveBtn/RedActiveBtn";
 import { Container, Icon, MainBlock, Navigate } from "./Home.styled";
 import sprite from "../../common/image/svg/sprite.svg";
-
-import FooterMain from "../../components/FooterMain/FooterMAin";
+import FooterMain from "../../components/FooterMain/FooterMain";
 const Home = () => (
   <Container className="page">
     <Navigate>
