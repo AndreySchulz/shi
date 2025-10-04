@@ -1,10 +1,12 @@
-import PageLayout from '../../components/PageLayout'
+import TableScore from "../../components/TableScore/TableScore";
+import { Container } from "./Table.styled";
 
-const Table = () => (
-  <PageLayout
-    title="Table"
-    caption="Shared table data and statistics will be organised here."
-  />
-)
+const Table = () => {
+  return (
+    <Container className="page">
+      <TableScore />
+    </Container>
+  );
+};
 
-export default Table
+export default Table;
