@@ -1,9 +1,13 @@
-import PageLayout from '../../components/PageLayout'
-const Result = () => (
-  <PageLayout
-    title="Result"
-    caption="Final scores and outcome summaries will live on this screen."
-  />
-)
+import ResultBox from "../../components/ResultBox/ResultBox";
+import { Container } from "./Result.styled";
 
-export default Result
+const Result = () => {
+  return (
+    <Container className="page">
+      <ResultBox />
+      <ResultBox />
+    </Container>
+  );
+};
+
+export default Result;
