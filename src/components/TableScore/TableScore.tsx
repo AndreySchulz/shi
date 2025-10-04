@@ -31,6 +31,9 @@ const data: Person[] = [
   { name: "Olivia", game: 30, score: "750", procent: "76" },
   { name: "Noah", game: 27, score: "630", procent: "69" },
   { name: "Ava", game: 21, score: "555", procent: "75" },
+  { name: "Sophia", game: 26, score: "490", procent: "70" },
+  { name: "James", game: 33, score: "610", procent: "78" },
+  { name: "Isabella", game: 29, score: "580", procent: "72" },
 ];
 
 const columnHelper = createColumnHelper<Person>();
