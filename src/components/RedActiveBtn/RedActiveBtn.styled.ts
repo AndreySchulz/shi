@@ -7,7 +7,7 @@ type RadiantProps = {
 const ripple = keyframes`
   0% {
     transform: scale(1);
-    border-color: #f5f5f5;
+    border-color: var(--super-light-grey);
     opacity: 1;
   }
   100% {
@@ -26,7 +26,7 @@ export const MainCircle = styled.div`
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #e93838;
+  background: var(--red);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 `;
 export const Radiant = styled.div<RadiantProps>`

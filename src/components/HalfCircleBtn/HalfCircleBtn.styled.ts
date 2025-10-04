@@ -30,7 +30,7 @@ export const HalfLeft = styled.div`
   height: 148px;
   top: 0;
   left: 0;
-  background: #e93838;
+  background: var(--red);
   border-top-left-radius: 148px;
   border-bottom-left-radius: 148px;
   box-sizing: border-box;
@@ -54,7 +54,7 @@ export const HalfRight = styled.div`
   height: 148px;
   top: 0;
   left: 74px;
-  background: #e93838;
+  background: var(--red);
   border-top-right-radius: 148px;
   border-bottom-right-radius: 148px;
   transform: translateX(96px);
