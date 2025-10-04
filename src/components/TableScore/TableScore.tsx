@@ -1,3 +1,4 @@
+import React from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -6,17 +7,30 @@ import {
 } from "@tanstack/react-table";
 import sprite from "../../common/image/svg/sprite.svg";
 import type { ColumnDef, Row } from "@tanstack/react-table";
+import {
+  TableIcon,
+  TableTd,
+  TableTh,
+  NameInTr,
+  RankCircle,
+} from "./TableScore.styled";
 
 type Person = {
   name: string;
-  game: string;
+  game: number;
   score: string;
 
   procent: string;
 };
 
 const data: Person[] = [
-  { name: "SHI", game: "28", score: "521", procent: "73" },
+  { name: "Alex", game: 28, score: "521", procent: "73" },
+  { name: "Mia", game: 32, score: "525", procent: "68" },
+  { name: "Ethan", game: 19, score: "418", procent: "82" },
+  { name: "Liam", game: 24, score: "600", procent: "71" },
+  { name: "Olivia", game: 30, score: "750", procent: "76" },
+  { name: "Noah", game: 27, score: "630", procent: "69" },
+  { name: "Ava", game: 21, score: "555", procent: "75" },
 ];
 
 const columnHelper = createColumnHelper<Person>();
@@ -25,35 +39,45 @@ const columns = [
   {
     id: "index",
     header: "#",
-    cell: ({ row }: { row: Row<Person> }) => row.index + 1,
+    cell: ({ row }: { row: Row<Person> }) => {
+      const index = row.index + 1;
+      return <RankCircle index={index}>{index}</RankCircle>;
+    },
   },
-  columnHelper.accessor("name", { header: "" }),
+  columnHelper.accessor("name", {
+    header: "",
+    cell: ({ getValue }) => <NameInTr>{getValue()}</NameInTr>,
+  }),
   columnHelper.accessor("game", {
     header: () => (
-      <svg width={20} height={20}>
+      <TableIcon>
         <use href={`${sprite}#MedalStarCircle`} />
-      </svg>
+      </TableIcon>
     ),
   }),
   columnHelper.accessor("score", {
     header: () => (
-      <svg width={20} height={20}>
+      <TableIcon>
         <use href={`${sprite}#Spedometer`} />
-      </svg>
+      </TableIcon>
     ),
   }),
   columnHelper.accessor("procent", {
     header: () => (
-      <svg width={20} height={20}>
+      <TableIcon>
         <use href={`${sprite}#arrows`} />
-      </svg>
+      </TableIcon>
     ),
   }),
 ] as ColumnDef<Person>[];
 
 const TableScore: React.FC = () => {
+  const sortedData = React.useMemo(() => {
+    return [...data].sort((a, b) => Number(a.score) - Number(b.score)); // по возрастанию
+  }, []);
+
   const table = useReactTable<Person>({
-    data,
+    data: sortedData,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -64,19 +88,12 @@ const TableScore: React.FC = () => {
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th
-                key={header.id}
-                style={{
-                  borderBottom: "2px solid #ccc",
-                  padding: "8px",
-                  textAlign: "left",
-                }}
-              >
+              <TableTh key={header.id}>
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
                 )}
-              </th>
+              </TableTh>
             ))}
           </tr>
         ))}
@@ -85,12 +102,9 @@ const TableScore: React.FC = () => {
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <td
-                key={cell.id}
-                style={{ borderBottom: "1px solid #eee", padding: "8px" }}
-              >
+              <TableTd key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+              </TableTd>
             ))}
           </tr>
         ))}
