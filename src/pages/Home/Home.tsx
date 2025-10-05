@@ -1,18 +1,12 @@
 import HalfCircleBtn from "../../components/HalfCircleBtn/HalfCircleBtn";
 import RedActiveBtn from "../../components/RedActiveBtn/RedActiveBtn";
-import { Container, Icon, MainBlock, Navigate } from "./Home.styled";
-import sprite from "../../common/image/svg/sprite.svg";
+import { Container, MainBlock } from "./Home.styled";
+
 import FooterMain from "../../components/FooterMain/FooterMain";
+import NavMain from "../../components/NavMain/NavMain";
 const Home = () => (
   <Container className="page">
-    <Navigate>
-      <Icon>
-        <use href={`${sprite}#Cup`}></use>
-      </Icon>
-      <Icon>
-        <use href={`${sprite}#HamburgerMenu`}></use>
-      </Icon>
-    </Navigate>
+    <NavMain />
     <MainBlock>
       <HalfCircleBtn />
     </MainBlock>
