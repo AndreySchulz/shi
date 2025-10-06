@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
 export const Navigate = styled.div`
+  position: absolute;
+  top: 0;
+
   width: 100%;
   height: 88px;
-  padding: 16px 0;
+  padding: 16px;
 
   display: flex;
   align-items: center;
