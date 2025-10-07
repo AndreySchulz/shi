@@ -1,10 +1,11 @@
-import PageLayout from '../../components/PageLayout'
+import Header from "../../components/Header/Header";
 
-const Connect = () => (
-  <PageLayout
-    title="Connect"
-    caption="Connection instructions and join codes will be added to this screen."
-  />
-)
+const Connect = () => {
+  return (
+    <div className="page">
+      <Header />
+    </div>
+  );
+};
 
-export default Connect
+export default Connect;
