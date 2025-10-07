@@ -1,11 +1,11 @@
-import NavMain from "../../components/NavMain/NavMain";
+import Header from "../../components/Header/Header";
 import TableScore from "../../components/TableScore/TableScore";
 import { Container } from "./Table.styled";
 
 const Table = () => {
   return (
     <Container className="page">
-      <NavMain />
+      <Header />
       <TableScore />
     </Container>
   );
