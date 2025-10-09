@@ -34,7 +34,11 @@
   justify-content: center;
   min-height: 320px;
   border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(232, 236, 243, 0.92));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(232, 236, 243, 0.92)
+  );
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
   padding: 2.5rem 1.5rem;
 }
@@ -60,6 +64,13 @@
   transition: opacity 200ms ease, transform 200ms ease;
   opacity: 0;
   pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    #19181d 0%,
+    #ffffff 38%,
+    #ffffff 65%,
+    #19181d 100%
+  );
 }
 
 .game__setup-stage--waiting .game__setup-layer--touch {
@@ -103,8 +114,6 @@
   width: clamp(64px, 20vw, 92px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.65), rgba(235, 64, 52, 0.92));
-  box-shadow: 0 18px 40px rgba(232, 67, 44, 0.28);
 }
 
 .game__touch-countdown {
