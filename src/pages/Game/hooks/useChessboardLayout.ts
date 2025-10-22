@@ -7,8 +7,8 @@ const useChessboardLayout = () =>
     const topRight = topLeft === ARENA_COLOR.Red ? ARENA_COLOR.Black : ARENA_COLOR.Red
 
     return {
-      player1: [topLeft, topRight],
-      player2: [topRight, topLeft],
+      player2: [topLeft, topRight],
+      player1: [topRight, topLeft],
     }
   }, [])
 

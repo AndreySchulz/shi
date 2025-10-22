@@ -1,6 +1,5 @@
 import { PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
 import type { PlayerId, SplitLayout } from '../../gameTypes'
-import TouchBoard from '../TouchBoard'
 
 type MainPhaseMode = 'waiting' | 'countdown' | 'split'
 
@@ -34,33 +33,35 @@ const MainPhase = ({
     .filter(Boolean)
     .join(' ')
 
-  const setupLayout = layout
+  const [player1Left, player1Right] = layout.player1
+  const [player2Left, player2Right] = layout.player2
 
-  const countdownBoard = (
-    <div className="game__board" role="presentation">
-      <TouchBoard displayValue={countdownSeconds} ariaLive="polite" />
-    </div>
-  )
-
-  const touchOverlay = (
-    <div className="game__setup-layer game__setup-layer--touch">
-      <TouchBoard displayValue="Ready" />
-    </div>
-  )
-
-  const splitOverlay = (
-    <div className="game__setup-layer game__setup-layer--grid">
-      <div className="game__split">
-        {[setupLayout.player1, setupLayout.player2].map((column, columnIndex) => (
-          <div className="game__split-column" key={`column-${columnIndex}`}>
-            {column.map((color, cellIndex) => (
-              <div
-                key={`column-${columnIndex}-cell-${cellIndex}`}
-                className={`game__split-cell game__split-cell--${color}`}
-              />
-            ))}
-          </div>
-        ))}
+  const boardContent = (
+    <div className="game__board game__board--main" role="presentation">
+      <div className="game__board-grid">
+        <div className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}>
+          <span className="game__board-circle" aria-hidden={isSplit} />
+        </div>
+        <div className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}>
+          <span className="game__board-circle" aria-hidden={isSplit} />
+        </div>
+        <div className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}>
+          <span className="game__board-circle" aria-hidden={isSplit} />
+        </div>
+        <div className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}>
+          <span className="game__board-circle" aria-hidden={isSplit} />
+        </div>
+      </div>
+      <div className="game__board-ready" aria-hidden={!isWaiting}>
+        <p className="game__board-ready-label">Ready</p>
+      </div>
+      <div className="game__board-countdown" aria-hidden={!isCountdown}>
+        <span
+          className="game__board-countdown-value"
+          aria-live={isCountdown ? 'polite' : 'off'}
+        >
+          {countdownSeconds}
+        </span>
       </div>
     </div>
   )
@@ -79,16 +80,20 @@ const MainPhase = ({
   const splitControls = (
     <div className="game__controls-panel game__controls-panel--split">
       <div className="game__actions">
-        {[PLAYER_ID.Player1, PLAYER_ID.Player2].map((player) => (
-          <button
-            key={player}
-            type="button"
-            className="game__button game__button--ghost"
-            onClick={() => onDeclareWinner(player)}
-          >
-            {playerLabels[player]} released first
-          </button>
-        ))}
+        <button
+          type="button"
+          className="game__button game__button--ghost"
+          onClick={() => onDeclareWinner(PLAYER_ID.Player1)}
+        >
+          {playerLabels[PLAYER_ID.Player1]} released first
+        </button>
+        <button
+          type="button"
+          className="game__button game__button--ghost"
+          onClick={() => onDeclareWinner(PLAYER_ID.Player2)}
+        >
+          {playerLabels[PLAYER_ID.Player2]} released first
+        </button>
       </div>
     </div>
   )
@@ -96,15 +101,6 @@ const MainPhase = ({
   const countdownControls = (
     <div className="game__controls-panel game__controls-panel--countdown">
       <p className="game__hint">Hold steady… the arena will split in a moment.</p>
-    </div>
-  )
-
-  const boardContent = isCountdown ? (
-    countdownBoard
-  ) : (
-    <div className="game__board game__board--setup" role="presentation">
-      {touchOverlay}
-      {splitOverlay}
     </div>
   )
 

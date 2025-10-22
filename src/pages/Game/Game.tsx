@@ -27,8 +27,6 @@ const Game = () => {
   const [splitLayout, setSplitLayout] = useState<SplitLayout>(() => createSplitLayout())
   const animationFrameRef = useRef<number | null>(null)
 
-  console.log('splitLayout-->>', splitLayout)
-
   const stopCountdownLoop = useCallback(() => {
     if (animationFrameRef.current !== null) {
       cancelAnimationFrame(animationFrameRef.current)
