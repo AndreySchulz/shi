@@ -4,8 +4,6 @@ import MainPhase from './components/Phases/MainPhase'
 import './components/Phases/Phases.css'
 import './Game.css'
 import {
-  ARENA_COLOR,
-  type ColumnLayout,
   MAX_COUNTDOWN_MS,
   MIN_COUNTDOWN_MS,
   PHASE,
@@ -14,6 +12,7 @@ import {
   PLAYER_LABEL,
   type SplitLayout,
 } from './gameTypes'
+import useChessboardLayout from './hooks/useChessboardLayout'
 
 const getRandomCountdown = () =>
   MIN_COUNTDOWN_MS + Math.floor(Math.random() * (MAX_COUNTDOWN_MS - MIN_COUNTDOWN_MS + 1))
@@ -25,6 +24,7 @@ const Game = () => {
   const [winner, setWinner] = useState<PlayerId | null>(null)
   const [splitLayout, setSplitLayout] = useState<SplitLayout | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+  const createSplitLayout = useChessboardLayout()
 
   const stopCountdownLoop = useCallback(() => {
     if (animationFrameRef.current !== null) {
@@ -48,16 +48,7 @@ const Game = () => {
 
       if (nextRemaining <= 0) {
         setRemainingMs(0)
-        const createColumn = (): ColumnLayout => {
-          const top = Math.random() > 0.5 ? ARENA_COLOR.Red : ARENA_COLOR.Black
-          const bottom = top === ARENA_COLOR.Red ? ARENA_COLOR.Black : ARENA_COLOR.Red
-          return [top, bottom]
-        }
-
-        setSplitLayout({
-          player1: createColumn(),
-          player2: createColumn(),
-        })
+        setSplitLayout(createSplitLayout())
         setPhase(PHASE.Split)
         stopCountdownLoop()
         return
@@ -69,7 +60,7 @@ const Game = () => {
     animationFrameRef.current = requestAnimationFrame(tick)
 
     return () => stopCountdownLoop()
-  }, [phase, countdownDuration, stopCountdownLoop])
+  }, [phase, countdownDuration, stopCountdownLoop, createSplitLayout])
 
   const startRound = useCallback(() => {
     setWinner(null)
