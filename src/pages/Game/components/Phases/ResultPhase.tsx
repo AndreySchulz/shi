@@ -22,6 +22,8 @@ const ResultPhase = ({ winnerLabel, onPlayAgain, onReset }: ResultPhaseProps) =>
         </button>
       </div>
     </footer>
+    <div>ResultPhase</div>
+
   </>
 )
 

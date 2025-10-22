@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import CountdownPhase from './components/CountdownPhase'
-import ResultPhase from './components/ResultPhase'
-import SetupPhase from './components/SetupPhase'
+import ResultPhase from './components/Phases/ResultPhase'
+import MainPhase from './components/Phases/MainPhase'
+import './components/Phases/Phases.css'
 import './Game.css'
 import {
   ARENA_COLOR,
@@ -102,22 +102,19 @@ const Game = () => {
   const renderPhaseContent = () => {
     switch (phase) {
       case PHASE.Waiting:
-        return (
-          <SetupPhase
-            mode="waiting"
-            layout={splitLayout}
-            onStartRound={startRound}
-            onDeclareWinner={declareWinner}
-            playerLabels={PLAYER_LABEL}
-          />
-        )
       case PHASE.Countdown:
-        return <CountdownPhase countdownSeconds={countdownSeconds} />
       case PHASE.Split:
         return (
-          <SetupPhase
-            mode="split"
+          <MainPhase
+            mode={
+              phase === PHASE.Countdown
+                ? 'countdown'
+                : phase === PHASE.Split
+                ? 'split'
+                : 'waiting'
+            }
             layout={splitLayout}
+            countdownSeconds={countdownSeconds}
             onStartRound={startRound}
             onDeclareWinner={declareWinner}
             playerLabels={PLAYER_LABEL}
