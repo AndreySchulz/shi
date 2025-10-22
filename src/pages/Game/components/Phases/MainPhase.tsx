@@ -1,4 +1,4 @@
-import { ARENA_COLOR, PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
+import { PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
 import type { PlayerId, SplitLayout } from '../../gameTypes'
 import TouchBoard from '../TouchBoard'
 
@@ -6,16 +6,11 @@ type MainPhaseMode = 'waiting' | 'countdown' | 'split'
 
 type MainPhaseProps = {
   mode: MainPhaseMode
-  layout: SplitLayout | null
+  layout: SplitLayout
   countdownSeconds?: number
   onStartRound: () => void
   onDeclareWinner: (playerId: PlayerId) => void
   playerLabels?: Record<PlayerId, string>
-}
-
-const DEFAULT_LAYOUT: SplitLayout = {
-  player1: [ARENA_COLOR.Red, ARENA_COLOR.Black],
-  player2: [ARENA_COLOR.Black, ARENA_COLOR.Red],
 }
 
 const MainPhase = ({
@@ -39,7 +34,7 @@ const MainPhase = ({
     .filter(Boolean)
     .join(' ')
 
-  const setupLayout = layout ?? DEFAULT_LAYOUT
+  const setupLayout = layout
 
   const countdownBoard = (
     <div className="game__board" role="presentation">

@@ -18,13 +18,16 @@ const getRandomCountdown = () =>
   MIN_COUNTDOWN_MS + Math.floor(Math.random() * (MAX_COUNTDOWN_MS - MIN_COUNTDOWN_MS + 1))
 
 const Game = () => {
+  const createSplitLayout = useChessboardLayout()
+
   const [phase, setPhase] = useState<Phase>(PHASE.Waiting)
   const [countdownDuration, setCountdownDuration] = useState<number>(0)
   const [remainingMs, setRemainingMs] = useState<number>(0)
   const [winner, setWinner] = useState<PlayerId | null>(null)
-  const [splitLayout, setSplitLayout] = useState<SplitLayout | null>(null)
+  const [splitLayout, setSplitLayout] = useState<SplitLayout>(() => createSplitLayout())
   const animationFrameRef = useRef<number | null>(null)
-  const createSplitLayout = useChessboardLayout()
+
+  console.log('splitLayout-->>', splitLayout)
 
   const stopCountdownLoop = useCallback(() => {
     if (animationFrameRef.current !== null) {
@@ -48,7 +51,6 @@ const Game = () => {
 
       if (nextRemaining <= 0) {
         setRemainingMs(0)
-        setSplitLayout(createSplitLayout())
         setPhase(PHASE.Split)
         stopCountdownLoop()
         return
@@ -60,16 +62,18 @@ const Game = () => {
     animationFrameRef.current = requestAnimationFrame(tick)
 
     return () => stopCountdownLoop()
-  }, [phase, countdownDuration, stopCountdownLoop, createSplitLayout])
+  }, [phase, countdownDuration, stopCountdownLoop])
 
   const startRound = useCallback(() => {
     setWinner(null)
-    setSplitLayout(null)
+    if (phase !== PHASE.Waiting) {
+      setSplitLayout(createSplitLayout())
+    }
     const duration = getRandomCountdown()
     setCountdownDuration(duration)
     setRemainingMs(duration)
     setPhase(PHASE.Countdown)
-  }, [])
+  }, [phase, createSplitLayout])
 
   const declareWinner = useCallback((playerId: PlayerId) => {
     setWinner(playerId)
@@ -79,11 +83,11 @@ const Game = () => {
   const resetGame = useCallback(() => {
     stopCountdownLoop()
     setWinner(null)
-    setSplitLayout(null)
+    setSplitLayout(createSplitLayout())
     setCountdownDuration(0)
     setRemainingMs(0)
     setPhase(PHASE.Waiting)
-  }, [stopCountdownLoop])
+  }, [stopCountdownLoop, createSplitLayout])
 
   const countdownSeconds = useMemo(
     () => Math.max(0, Math.ceil(remainingMs / 1000)),
