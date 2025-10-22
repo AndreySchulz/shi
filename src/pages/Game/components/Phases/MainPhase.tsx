@@ -1,11 +1,12 @@
 import { PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
-import type { PlayerId, SplitLayout } from '../../gameTypes'
+import type { CircleOffsetLayout, CirclePosition, PlayerId, SplitLayout } from '../../gameTypes'
 
 type MainPhaseMode = 'waiting' | 'countdown' | 'split'
 
 type MainPhaseProps = {
   mode: MainPhaseMode
   layout: SplitLayout
+  circleOffsets: CircleOffsetLayout
   countdownSeconds?: number
   onStartRound: () => void
   onDeclareWinner: (playerId: PlayerId) => void
@@ -15,6 +16,7 @@ type MainPhaseProps = {
 const MainPhase = ({
   mode,
   layout,
+  circleOffsets,
   countdownSeconds = 0,
   onStartRound,
   onDeclareWinner,
@@ -35,21 +37,26 @@ const MainPhase = ({
 
   const [player1Left, player1Right] = layout.player1
   const [player2Left, player2Right] = layout.player2
+  const [player1LeftPos, player1RightPos] = circleOffsets.player1
+  const [player2LeftPos, player2RightPos] = circleOffsets.player2
+
+  const circleClassName = (position: CirclePosition) =>
+    `game__board-circle game__board-circle--${position}`
 
   const boardContent = (
     <div className="game__board game__board--main" role="presentation">
       <div className="game__board-grid">
         <div className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}>
-          <span className="game__board-circle" aria-hidden={isSplit} />
+          <span className={circleClassName(player2LeftPos)} aria-hidden={isSplit} />
         </div>
         <div className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}>
-          <span className="game__board-circle" aria-hidden={isSplit} />
+          <span className={circleClassName(player2RightPos)} aria-hidden={isSplit} />
         </div>
         <div className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}>
-          <span className="game__board-circle" aria-hidden={isSplit} />
+          <span className={circleClassName(player1LeftPos)} aria-hidden={isSplit} />
         </div>
         <div className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}>
-          <span className="game__board-circle" aria-hidden={isSplit} />
+          <span className={circleClassName(player1RightPos)} aria-hidden={isSplit} />
         </div>
       </div>
       <div className="game__board-ready" aria-hidden={!isWaiting}>
