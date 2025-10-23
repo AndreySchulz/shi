@@ -6,20 +6,22 @@ import React, {
 } from "react";
 import { useFormik } from "formik";
 import {
+  BtnIcon,
   DigitInput,
   ErrorText,
   Form,
   InputGroup,
+  TextError,
   VerifyButton,
 } from "./ConnectForm.styled";
-
+import sprite from "../../common/image/svg/sprite.svg";
 interface ConnectFormProps {
   length?: number;
   onSubmit?: (code: string) => void;
 }
 
 const ConnectForm: React.FC<ConnectFormProps> = ({
-  length = 6,
+  length = 4,
   onSubmit = (code) => console.log("gameCode", code),
 }) => {
   const refs = useRef<HTMLInputElement[]>([]);
@@ -40,7 +42,8 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, idx: number) => {
-    const digit = e.target.value.slice(0, 1).toUpperCase();
+    const value = e.target.value.replace(/\D/g, "");
+    const digit = value.slice(0, 1);
     formik.setFieldValue(`otp[${idx}]`, digit);
     if (digit && idx < length - 1) refs.current[idx + 1]?.focus();
   };
@@ -88,11 +91,14 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
           />
         ))}
       </InputGroup>
-
-      {formik.errors.otp && <ErrorText>{formik.errors.otp}</ErrorText>}
+      <TextError>
+        {formik.errors.otp && <ErrorText>{formik.errors.otp}</ErrorText>}
+      </TextError>
 
       <VerifyButton type="submit" disabled={!allFilled}>
-        Connect
+        <BtnIcon>
+          <use href={`${sprite}#arrowLeft`}></use>
+        </BtnIcon>
       </VerifyButton>
     </Form>
   );

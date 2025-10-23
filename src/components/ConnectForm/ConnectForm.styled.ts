@@ -12,6 +12,14 @@ export const InputGroup = styled.div`
   gap: 0.5rem;
 `;
 
+export const TextError = styled.div`
+  color: red;
+  font-size: 14px;
+  height: 18px;
+  margin-top: 8px;
+  text-align: center;
+`;
+
 export const DigitInput = styled.input`
   width: 3rem;
   height: 3rem;
@@ -34,13 +42,11 @@ export const ErrorText = styled.div`
 `;
 
 export const VerifyButton = styled.button`
-  margin-top: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  background: var(--red);
-  color: white;
   border: none;
-  cursor: pointer;
-  transition: background 0.2s;
+  background: none;
+`;
+export const BtnIcon = styled.svg`
+  stroke: var(--red);
+  rotate: 180deg;
+  height: 66px;
 `;

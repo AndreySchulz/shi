@@ -24,8 +24,8 @@ const ripple = keyframes`
 
 export const Container = styled.div`
   position: relative;
-  width: 66px;
-  height: 66px;
+  width: 100px;
+  height: 100px;
 `;
 export const MainCircle = styled.div`
   position: absolute;
