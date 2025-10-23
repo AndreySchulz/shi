@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
 import type { PlayerId, SplitLayout } from '../../gameTypes'
 
@@ -34,30 +34,84 @@ const MainPhase = ({
     .filter(Boolean)
     .join(' ')
 
-    const circuleOffset = useMemo(() => [randomCircleOffset(), randomCircleOffset(), randomCircleOffset(), randomCircleOffset()], []);
+  const circuleOffset = useMemo(
+    () => [randomCircleOffset(), randomCircleOffset(), randomCircleOffset(), randomCircleOffset()],
+    [],
+  )
+
+  const [touchCount, setTouchCount] = useState<number>(0)
+
+  useEffect(() => {
+    if (!isWaiting && touchCount !== 0) {
+      setTouchCount(0)
+    }
+  }, [isWaiting, touchCount])
+
+  const incrementTouch = useCallback(() => {
+    if (!isWaiting) return
+
+    setTouchCount((prev) => {
+      const next = Math.min(prev + 1, 4)
+      if (next === 4) {
+        onStartRound()
+      }
+      return next
+    })
+  }, [isWaiting, onStartRound])
+
+  const decrementTouch = useCallback(() => {
+    if (!isWaiting) return
+
+    setTouchCount((prev) => Math.max(prev - 1, 0))
+  }, [isWaiting])
 
 
   const [player1Left, player1Right] = layout.player1
   const [player2Left, player2Right] = layout.player2
 
   const boardContent = (
-    <div className="game__board game__board--main" role="presentation">
+    <div
+      className="game__board game__board--main" role="presentation">
       <div className="game__board-grid">
         <div className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}>
-          <span className="game__board-circle" style={{marginLeft: circuleOffset[0]}} aria-hidden={isSplit} />
+          <span
+            className="game__board-circle"
+            style={{ marginLeft: circuleOffset[0] }}
+            aria-hidden={isSplit}
+            onPointerDown={incrementTouch}
+            onPointerLeave={decrementTouch}
+          />
         </div>
         <div className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}>
-          <span className="game__board-circle" style={{marginLeft: circuleOffset[1]}} aria-hidden={isSplit} />
+          <span
+            className="game__board-circle"
+            style={{ marginLeft: circuleOffset[1] }}
+            aria-hidden={isSplit}
+            onTouchStart={incrementTouch}
+            onPointerLeave={decrementTouch}
+          />
         </div>
         <div className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}>
-          <span className="game__board-circle" style={{marginLeft: circuleOffset[2]}} aria-hidden={isSplit} />
+          <span
+            className="game__board-circle"
+            style={{ marginLeft: circuleOffset[2] }}
+            aria-hidden={isSplit}
+            onTouchStart={incrementTouch}
+            onPointerLeave={decrementTouch}
+          />
         </div>
         <div className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}>
-          <span className="game__board-circle" style={{marginLeft: circuleOffset[3]}} aria-hidden={isSplit} />
+          <span
+            className="game__board-circle"
+            style={{ marginLeft: circuleOffset[3] }}
+            aria-hidden={isSplit}
+            onTouchStart={incrementTouch}
+            onPointerLeave={decrementTouch}
+          />
         </div>
       </div>
       <div className="game__board-ready" aria-hidden={!isWaiting}>
-        <p className="game__board-ready-label">Ready</p>
+        <p className="game__board-ready-label">Ready {touchCount}/4</p>
       </div>
       <div className="game__board-countdown" aria-hidden={!isCountdown}>
         <span
