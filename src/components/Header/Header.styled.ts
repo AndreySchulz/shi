@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navigate = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
 
   width: 100%;
@@ -11,6 +11,8 @@ export const Navigate = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  background-color: #f5f7fb;
 `;
 
 export const IconButton = styled.button`
@@ -26,6 +28,7 @@ export const IconButton = styled.button`
   &:last-of-type {
     margin-right: 0;
   }
+  stroke: black;
 `;
 
 export const Icon = styled.svg`

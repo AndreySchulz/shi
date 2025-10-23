@@ -6,10 +6,25 @@ export const TableIcon = styled.svg`
   stroke: var(--grey);
 `;
 export const TableTh = styled.th`
-  border-bottom: 1px solid rgba(140, 138, 145, 0.12);
-
   text-align: center;
   color: var(--grey);
+
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #f5f7fb;
+  backdrop-filter: blur(6px);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(140, 138, 145, 0.12);
+  }
 `;
 export const TableTd = styled.td`
   padding: 14px 0;
@@ -51,4 +66,20 @@ export const RankCircle = styled.span<{ index: number }>`
       : index === 3
       ? "#ae9976"
       : "var(--light-gray)"};
+`;
+export const TableWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  margin-top: 88px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 12px;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

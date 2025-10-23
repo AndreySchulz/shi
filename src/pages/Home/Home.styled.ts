@@ -18,3 +18,17 @@ export const MainBlock = styled.div`
   align-items: center;
   justify-content: center;
 `;
+export const IconButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+`;

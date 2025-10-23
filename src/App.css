@@ -7,6 +7,7 @@
 }
 
 .page {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -14,7 +15,8 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  padding: 4rem 1.5rem;
+
+  height: 100vh;
 }
 
 .page__title {
@@ -82,10 +84,6 @@
 }
 
 @media (max-width: 600px) {
-  .page {
-    padding: 3rem 1rem;
-  }
-
   .navigation {
     padding: 0.75rem 1rem;
   }

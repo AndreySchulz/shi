@@ -1,10 +1,11 @@
-import PageLayout from '../../components/PageLayout'
+import Header from "../../components/Header/Header";
 
-const Host = () => (
-  <PageLayout
-    title="Host"
-    caption="Controls for creating and managing a new game session will appear here."
-  />
-)
+const Host = () => {
+  return (
+    <div className="page">
+      <Header />
+    </div>
+  );
+};
 
-export default Host
+export default Host;

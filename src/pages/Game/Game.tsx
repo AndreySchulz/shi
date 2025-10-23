@@ -18,7 +18,8 @@ import {
 import useChessboardLayout from './hooks/useChessboardLayout'
 
 const getRandomCountdown = () =>
-  MIN_COUNTDOWN_MS + Math.floor(Math.random() * (MAX_COUNTDOWN_MS - MIN_COUNTDOWN_MS + 1))
+  MIN_COUNTDOWN_MS +
+  Math.floor(Math.random() * (MAX_COUNTDOWN_MS - MIN_COUNTDOWN_MS + 1));
 
 const Game = () => {
   const createSplitLayout = useChessboardLayout()
@@ -35,23 +36,23 @@ const Game = () => {
 
   const stopCountdownLoop = useCallback(() => {
     if (animationFrameRef.current !== null) {
-      cancelAnimationFrame(animationFrameRef.current)
-      animationFrameRef.current = null
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
     }
-  }, [])
+  }, []);
 
-  useEffect(() => stopCountdownLoop, [stopCountdownLoop])
+  useEffect(() => stopCountdownLoop, [stopCountdownLoop]);
 
   useEffect(() => {
-    if (phase !== PHASE.Countdown) return undefined
+    if (phase !== PHASE.Countdown) return undefined;
 
-    stopCountdownLoop()
-    const startedAt = performance.now()
+    stopCountdownLoop();
+    const startedAt = performance.now();
 
     const tick = (now: number) => {
-      const elapsed = now - startedAt
-      const nextRemaining = Math.max(countdownDuration - elapsed, 0)
-      setRemainingMs(nextRemaining)
+      const elapsed = now - startedAt;
+      const nextRemaining = Math.max(countdownDuration - elapsed, 0);
+      setRemainingMs(nextRemaining);
 
       if (nextRemaining <= 0) {
         setRemainingMs(0)
@@ -60,13 +61,13 @@ const Game = () => {
         return
       }
 
-      animationFrameRef.current = requestAnimationFrame(tick)
-    }
+      animationFrameRef.current = requestAnimationFrame(tick);
+    };
 
-    animationFrameRef.current = requestAnimationFrame(tick)
+    animationFrameRef.current = requestAnimationFrame(tick);
 
-    return () => stopCountdownLoop()
-  }, [phase, countdownDuration, stopCountdownLoop])
+    return () => stopCountdownLoop();
+  }, [phase, countdownDuration, stopCountdownLoop]);
 
   const startRound = useCallback(() => {
     setWinner(null)
@@ -113,8 +114,8 @@ const Game = () => {
 
   const countdownSeconds = useMemo(
     () => Math.max(0, Math.ceil(remainingMs / 1000)),
-    [remainingMs],
-  )
+    [remainingMs]
+  );
 
   useEffect(() => {
     if (phase === PHASE.Split) {
@@ -170,7 +171,7 @@ const Game = () => {
             playerLabels={PLAYER_LABEL}
             onCellTouchEnd={handleCellTouchEnd}
           />
-        )
+        );
       case PHASE.Result:
         return winner ? (
           <ResultPhase
@@ -179,11 +180,11 @@ const Game = () => {
             onPlayAgain={startRound}
             onReset={resetGame}
           />
-        ) : null
+        ) : null;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <section className="game" aria-labelledby="game-title">
@@ -192,13 +193,14 @@ const Game = () => {
           Game
         </h1>
         <p className="game__subtitle">
-          Two-player reflex duel. Place your fingers, wait for the split, and release first.
+          Two-player reflex duel. Place your fingers, wait for the split, and
+          release first.
         </p>
       </header>
 
       {renderPhaseContent()}
     </section>
-  )
-}
+  );
+};
 
-export default Game
+export default Game;

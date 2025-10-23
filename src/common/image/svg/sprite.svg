@@ -1,7 +1,7 @@
 <svg width="0" height="0" class="hidden">
   <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 40" id="arrowLeft">
-    <path d="M16.4499 9.88333L6.33325 20L16.4499 30.1167" stroke="white" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-    <path d="M34.6665 20H6.61646" stroke="white" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M16.4499 9.88333L6.33325 20L16.4499 30.1167"  stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M34.6665 20H6.61646"  stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>
   <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="Cup">
     <path d="M14.0002 18.6667C7.28026 18.6667 6.08981 11.9695 5.87892 6.65755C5.82026 5.17997 5.79093 4.44118 6.34594 3.75764C6.90094 3.07409 7.5652 2.96202 8.89372 2.73787C10.2051 2.5166 11.9194 2.33333 14.0002 2.33333C16.081 2.33333 17.7953 2.5166 19.1067 2.73787C20.4352 2.96202 21.0994 3.07409 21.6544 3.75764C22.2094 4.44118 22.1801 5.17997 22.1215 6.65755C21.9106 11.9695 20.7201 18.6667 14.0002 18.6667Z" stroke="#19181D" stroke-width="2"></path>
