@@ -1,11 +1,16 @@
 type ResultPhaseProps = {
-  winnerLabel: string
-  timeMs: number
-  onPlayAgain: () => void
-  onReset: () => void
-}
+  winnerLabel: string;
+  timeMs: number;
+  onPlayAgain: () => void;
+  onReset: () => void;
+};
 
-const ResultPhase = ({ winnerLabel, timeMs, onPlayAgain, onReset }: ResultPhaseProps) => (
+const ResultPhase = ({
+  winnerLabel,
+  timeMs,
+  onPlayAgain,
+  onReset,
+}: ResultPhaseProps) => (
   <>
     <div className="game__board" role="status">
       <div className="game__result">
@@ -16,15 +21,23 @@ const ResultPhase = ({ winnerLabel, timeMs, onPlayAgain, onReset }: ResultPhaseP
     </div>
     <footer className="game__controls">
       <div className="game__actions">
-        <button type="button" className="game__button game__button--primary" onClick={onPlayAgain}>
+        <button
+          type="button"
+          className="game__button game__button--primary"
+          onClick={onPlayAgain}
+        >
           Play Again
         </button>
-        <button type="button" className="game__button game__button--ghost" onClick={onReset}>
+        <button
+          type="button"
+          className="game__button game__button--ghost"
+          onClick={onReset}
+        >
           Reset
         </button>
       </div>
     </footer>
   </>
-)
+);
 
-export default ResultPhase
+export default ResultPhase;

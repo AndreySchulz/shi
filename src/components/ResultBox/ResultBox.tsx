@@ -9,8 +9,11 @@ import {
   RusultGameBox,
   Score,
 } from "./ResultBox.styled";
-
-const ResultBox = () => {
+type ResultPhaseProps = {
+  timeMs: number;
+  onPlayAgain: () => void;
+};
+const ResultBox = ({ timeMs, onPlayAgain }: ResultPhaseProps) => {
   const { goTo } = useScreenNavigation();
   return (
     <Container>
@@ -19,7 +22,7 @@ const ResultBox = () => {
           <Icon>
             <use href={`${sprite}#Spedometer`}></use>
           </Icon>
-          <Score>519</Score>
+          <Score>{timeMs}</Score>
         </IconBox>
         <IconBox>
           <IconButton
@@ -34,7 +37,7 @@ const ResultBox = () => {
           <IconButton
             type="button"
             aria-label="Go to game screen"
-            onClick={() => goTo("game")}
+            onClick={onPlayAgain}
           >
             <Icon>
               <use href={`${sprite}#refresh`}></use>
