@@ -1,15 +1,17 @@
 type ResultPhaseProps = {
   winnerLabel: string
+  timeMs: number
   onPlayAgain: () => void
   onReset: () => void
 }
 
-const ResultPhase = ({ winnerLabel, onPlayAgain, onReset }: ResultPhaseProps) => (
+const ResultPhase = ({ winnerLabel, timeMs, onPlayAgain, onReset }: ResultPhaseProps) => (
   <>
     <div className="game__board" role="status">
       <div className="game__result">
         <p className="game__result-label">Winner</p>
         <p className="game__result-player">{winnerLabel}</p>
+        <p className="game__result-time">{timeMs} ms</p>
       </div>
     </div>
     <footer className="game__controls">
@@ -22,8 +24,6 @@ const ResultPhase = ({ winnerLabel, onPlayAgain, onReset }: ResultPhaseProps) =>
         </button>
       </div>
     </footer>
-    <div>ResultPhase</div>
-
   </>
 )
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { PLAYER_ID, PLAYER_LABEL } from '../../gameTypes'
-import type { PlayerId, SplitLayout } from '../../gameTypes'
+import type { ArenaColor, PlayerId, SplitLayout } from '../../gameTypes'
 
 type MainPhaseMode = 'waiting' | 'countdown' | 'split'
 
@@ -11,6 +11,7 @@ type MainPhaseProps = {
   onStartRound: () => void
   onDeclareWinner: (playerId: PlayerId) => void
   playerLabels?: Record<PlayerId, string>
+  onCellTouchEnd: (playerId: PlayerId, color: ArenaColor) => void
 }
 
 const MainPhase = ({
@@ -20,6 +21,7 @@ const MainPhase = ({
   onStartRound,
   onDeclareWinner,
   playerLabels = PLAYER_LABEL,
+  onCellTouchEnd,
 }: MainPhaseProps) => {
   const isCountdown = mode === 'countdown'
   const isSplit = mode === 'split'
@@ -73,7 +75,11 @@ const MainPhase = ({
     <div
       className="game__board game__board--main" role="presentation">
       <div className="game__board-grid">
-        <div className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}>
+        <div
+          className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}
+          onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player2, player2Left)}
+          onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player2, player2Left)}
+        >
           <span
             className="game__board-circle"
             style={{ marginLeft: circuleOffset[0] }}
@@ -82,7 +88,11 @@ const MainPhase = ({
             onPointerLeave={decrementTouch}
           />
         </div>
-        <div className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}>
+        <div
+          className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}
+          onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player2, player2Right)}
+          onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player2, player2Right)}
+        >
           <span
             className="game__board-circle"
             style={{ marginLeft: circuleOffset[1] }}
@@ -91,7 +101,11 @@ const MainPhase = ({
             onPointerLeave={decrementTouch}
           />
         </div>
-        <div className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}>
+        <div
+          className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}
+          onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player1, player1Left)}
+          onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player1, player1Left)}
+        >
           <span
             className="game__board-circle"
             style={{ marginLeft: circuleOffset[2] }}
@@ -100,7 +114,11 @@ const MainPhase = ({
             onPointerLeave={decrementTouch}
           />
         </div>
-        <div className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}>
+        <div
+          className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}
+          onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player1, player1Right)}
+          onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player1, player1Right)}
+        >
           <span
             className="game__board-circle"
             style={{ marginLeft: circuleOffset[3] }}

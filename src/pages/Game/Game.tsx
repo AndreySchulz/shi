@@ -4,13 +4,16 @@ import MainPhase from './components/Phases/MainPhase'
 import './components/Phases/Phases.css'
 import './Game.css'
 import {
+  ARENA_COLOR,
   MAX_COUNTDOWN_MS,
   MIN_COUNTDOWN_MS,
   PHASE,
   type Phase,
+  type ArenaColor,
   type PlayerId,
   PLAYER_LABEL,
   type SplitLayout,
+  PLAYER_ID,
 } from './gameTypes'
 import useChessboardLayout from './hooks/useChessboardLayout'
 
@@ -24,8 +27,11 @@ const Game = () => {
   const [countdownDuration, setCountdownDuration] = useState<number>(0)
   const [remainingMs, setRemainingMs] = useState<number>(0)
   const [winner, setWinner] = useState<PlayerId | null>(null)
+  const [resultTimeMs, setResultTimeMs] = useState<number | null>(null)
   const [splitLayout, setSplitLayout] = useState<SplitLayout>(() => createSplitLayout())
   const animationFrameRef = useRef<number | null>(null)
+  const splitStartRef = useRef<number | null>(null)
+  const roundFinishedRef = useRef<boolean>(false)
 
   const stopCountdownLoop = useCallback(() => {
     if (animationFrameRef.current !== null) {
@@ -64,6 +70,9 @@ const Game = () => {
 
   const startRound = useCallback(() => {
     setWinner(null)
+    setResultTimeMs(null)
+    roundFinishedRef.current = false
+    splitStartRef.current = null
     if (phase !== PHASE.Waiting) {
       setSplitLayout(createSplitLayout())
     }
@@ -73,15 +82,29 @@ const Game = () => {
     setPhase(PHASE.Countdown)
   }, [phase, createSplitLayout])
 
-  const declareWinner = useCallback((playerId: PlayerId) => {
+  const finishRound = useCallback((playerId: PlayerId, elapsedMs: number | null) => {
+    if (roundFinishedRef.current) return
+    roundFinishedRef.current = true
     setWinner(playerId)
+    setResultTimeMs(elapsedMs)
     setPhase(PHASE.Result)
+    splitStartRef.current = null
   }, [])
+
+  const declareWinner = useCallback(
+    (playerId: PlayerId) => {
+      finishRound(playerId, splitStartRef.current ? Date.now() - splitStartRef.current : null)
+    },
+    [finishRound],
+  )
 
 
   const resetGame = useCallback(() => {
     stopCountdownLoop()
     setWinner(null)
+    setResultTimeMs(null)
+    roundFinishedRef.current = false
+    splitStartRef.current = null
     setSplitLayout(createSplitLayout())
     setCountdownDuration(0)
     setRemainingMs(0)
@@ -91,6 +114,39 @@ const Game = () => {
   const countdownSeconds = useMemo(
     () => Math.max(0, Math.ceil(remainingMs / 1000)),
     [remainingMs],
+  )
+
+  useEffect(() => {
+    if (phase === PHASE.Split) {
+      splitStartRef.current = Date.now()
+    }
+  }, [phase])
+
+  const handleCellTouchEnd = useCallback(
+    (playerId: PlayerId, color: ArenaColor) => {
+      if (roundFinishedRef.current) return
+      const opponent = playerId === PLAYER_ID.Player1 ? PLAYER_ID.Player2 : PLAYER_ID.Player1
+
+      if (phase === PHASE.Countdown) {
+        stopCountdownLoop()
+        finishRound(opponent, 0)
+        return
+      }
+
+      if (phase !== PHASE.Split) return
+
+      const elapsed = splitStartRef.current ? Date.now() - splitStartRef.current : 0
+
+      if (color === ARENA_COLOR.Red) {
+        finishRound(opponent, elapsed)
+        return
+      }
+
+      if (color === ARENA_COLOR.Black) {
+        finishRound(playerId, elapsed)
+      }
+    },
+    [phase, finishRound, stopCountdownLoop],
   )
 
   const renderPhaseContent = () => {
@@ -112,12 +168,14 @@ const Game = () => {
             onStartRound={startRound}
             onDeclareWinner={declareWinner}
             playerLabels={PLAYER_LABEL}
+            onCellTouchEnd={handleCellTouchEnd}
           />
         )
       case PHASE.Result:
         return winner ? (
           <ResultPhase
             winnerLabel={PLAYER_LABEL[winner]}
+            timeMs={resultTimeMs ?? 0}
             onPlayAgain={startRound}
             onReset={resetGame}
           />
