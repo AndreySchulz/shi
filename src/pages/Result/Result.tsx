@@ -1,11 +1,15 @@
 import ResultBox from "../../components/ResultBox/ResultBox";
 import { Container } from "./Result.styled";
+type ResultPhaseProps = {
+  timeMs: number;
+  onPlayAgain: () => void;
+};
 
-const Result = () => {
+const Result = ({ timeMs, onPlayAgain }: ResultPhaseProps) => {
   return (
     <Container className="page">
-      <ResultBox />
-      <ResultBox />
+      <ResultBox timeMs={timeMs} onPlayAgain={onPlayAgain} />
+      <ResultBox timeMs={timeMs} onPlayAgain={onPlayAgain} />
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import ResultPhase from "./components/Phases/ResultPhase";
+// import ResultPhase from "./components/Phases/ResultPhase";
 import MainPhase from "./components/Phases/MainPhase";
 import "./components/Phases/Phases.css";
 import "./Game.css";
@@ -16,6 +16,7 @@ import {
   PLAYER_ID,
 } from "./gameTypes";
 import useChessboardLayout from "./hooks/useChessboardLayout";
+import Result from "../Result/Result";
 
 const getRandomCountdown = () =>
   MIN_COUNTDOWN_MS +
@@ -32,6 +33,7 @@ const Game = () => {
   const [splitLayout, setSplitLayout] = useState<SplitLayout>(() =>
     createSplitLayout()
   );
+
   const animationFrameRef = useRef<number | null>(null);
   const splitStartRef = useRef<number | null>(null);
   const roundFinishedRef = useRef<boolean>(false);
@@ -184,12 +186,15 @@ const Game = () => {
         );
       case PHASE.Result:
         return winner ? (
-          <ResultPhase
-            winnerLabel={PLAYER_LABEL[winner]}
-            timeMs={resultTimeMs ?? 0}
-            onPlayAgain={startRound}
-            onReset={resetGame}
-          />
+          <>
+            {/* <ResultPhase
+              winnerLabel={PLAYER_LABEL[winner]}
+              timeMs={resultTimeMs ?? 0}
+              onPlayAgain={startRound}
+              onReset={resetGame}
+            /> */}
+            <Result timeMs={resultTimeMs ?? 0} onPlayAgain={resetGame} />
+          </>
         ) : null;
       default:
         return null;
