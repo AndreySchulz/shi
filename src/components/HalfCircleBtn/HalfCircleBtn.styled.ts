@@ -3,23 +3,23 @@ import styled, { keyframes } from "styled-components";
 const halfSlide = keyframes`
 0% {
     transform: translateX(95px);
-    opacity: 0;           /* невидим в начале */
+    opacity: 0;           
   }
   25% {
     transform: translateX(0);
-    opacity: 1;           /* приехал и появился */
+    opacity: 1;           
   }
   50% {
     transform: translateX(0);
-    opacity: 1;           /* стоит, видимый */
+    opacity: 1;          
   }
   60% {
     transform: translateX(0);
-    opacity: 0;           /* начинает исчезать */
+    opacity: 0;          
   }
   100% {
     transform: translateX(95px);
-    opacity: 0;           /* вернулся в начало, невидим */
+    opacity: 0;           
   }
 `;
 
@@ -63,5 +63,5 @@ export const HalfRight = styled.div`
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
   transform: translateX(96px);
-  animation: ${halfSlide} 4s ease-in-out infinite;
+  animation: ${halfSlide} 2s ease-in-out infinite;
 `;

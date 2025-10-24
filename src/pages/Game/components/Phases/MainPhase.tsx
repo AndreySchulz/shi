@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { PLAYER_ID } from "../../gameTypes";
 import type { ArenaColor, PlayerId, SplitLayout } from "../../gameTypes";
 import RedActiveBtn from "../../../../components/RedActiveBtn/RedActiveBtn";
+import HeaderGame from "../HeaderGame/HeaderGame";
+import FooterGame from "../FooterGame/FooterGame";
 
 type MainPhaseMode = "waiting" | "countdown" | "split";
 
@@ -77,6 +79,7 @@ const MainPhase = ({
 
   const boardContent = (
     <div className="game__board game__board--main" role="presentation">
+      <HeaderGame />
       <div className="game__board-grid">
         <div
           className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}
@@ -146,6 +149,7 @@ const MainPhase = ({
           {countdownSeconds}
         </span>
       </div>
+      <FooterGame />
     </div>
   );
 
