@@ -9,12 +9,20 @@ import {
   RusultGameBox,
   Score,
 } from "./ResultBox.styled";
+import { useState } from "react";
 type ResultPhaseProps = {
   timeMs: number;
-  onPlayAgain: () => void;
+  onPlayAgain: React.Dispatch<React.SetStateAction<string>>;
 };
 const ResultBox = ({ timeMs, onPlayAgain }: ResultPhaseProps) => {
   const { goTo } = useScreenNavigation();
+  const [icon, setIcon] = useState("refresh");
+
+  const onClick = () => {
+    setIcon("accept");
+    onPlayAgain("true");
+  };
+
   return (
     <Container>
       <RusultGameBox>
@@ -37,10 +45,10 @@ const ResultBox = ({ timeMs, onPlayAgain }: ResultPhaseProps) => {
           <IconButton
             type="button"
             aria-label="Go to game screen"
-            onClick={onPlayAgain}
+            onClick={onClick}
           >
             <Icon>
-              <use href={`${sprite}#refresh`}></use>
+              <use href={`${sprite}#${icon}`}></use>
             </Icon>
           </IconButton>
         </IconBox>

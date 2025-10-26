@@ -30,6 +30,7 @@ export const Icon = styled.svg`
   width: 56px;
   height: 56px;
   stroke: white;
+  fill: white;
 `;
 export const IconButton = styled.button`
   display: inline-flex;
