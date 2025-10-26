@@ -82,12 +82,13 @@ const MainPhase = ({
       <HeaderGame />
       <div className="game__board-grid">
         <div
+          style={{ paddingRight: "20%" }}
           className={`game__board-cell game__board-cell--top-left game__board-cell--${player2Left}`}
           onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player2, player2Left)}
           onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player2, player2Left)}
         >
           <span
-            style={{ marginLeft: circuleOffset[0] }}
+            style={{ marginLeft: circuleOffset[0] + "%" }}
             aria-hidden={isSplit}
             onTouchStart={incrementTouch}
             onPointerLeave={decrementTouch}
@@ -96,12 +97,13 @@ const MainPhase = ({
           </span>
         </div>
         <div
+          style={{ paddingLeft: "20%" }}
           className={`game__board-cell game__board-cell--top-right game__board-cell--${player2Right}`}
           onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player2, player2Right)}
           onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player2, player2Right)}
         >
           <span
-            style={{ marginLeft: circuleOffset[1] }}
+            style={{ marginLeft: circuleOffset[1] + "%" }}
             aria-hidden={isSplit}
             onTouchStart={incrementTouch}
             onPointerLeave={decrementTouch}
@@ -110,12 +112,13 @@ const MainPhase = ({
           </span>
         </div>
         <div
+          style={{ paddingRight: "20%" }}
           className={`game__board-cell game__board-cell--bottom-left game__board-cell--${player1Left}`}
           onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player1, player1Left)}
           onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player1, player1Left)}
         >
           <span
-            style={{ marginLeft: circuleOffset[2] }}
+            style={{ marginLeft: circuleOffset[2] + "%" }}
             aria-hidden={isSplit}
             onTouchStart={incrementTouch}
             onPointerLeave={decrementTouch}
@@ -124,12 +127,13 @@ const MainPhase = ({
           </span>
         </div>
         <div
+          style={{ paddingLeft: "20%" }}
           className={`game__board-cell game__board-cell--bottom-right game__board-cell--${player1Right}`}
           onTouchEnd={() => onCellTouchEnd(PLAYER_ID.Player1, player1Right)}
           onTouchCancel={() => onCellTouchEnd(PLAYER_ID.Player1, player1Right)}
         >
           <span
-            style={{ marginLeft: circuleOffset[3] }}
+            style={{ marginLeft: circuleOffset[3] + "%" }}
             aria-hidden={isSplit}
             onTouchStart={incrementTouch}
             onPointerLeave={decrementTouch}
@@ -159,5 +163,5 @@ const MainPhase = ({
 export default MainPhase;
 
 function randomCircleOffset() {
-  return Math.floor(Math.random() * 201) - 100;
+  return Math.floor(Math.random() * 40) - 20;
 }

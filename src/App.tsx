@@ -1,11 +1,14 @@
-import './App.css'
-import { ScreenNavigationProvider, useScreenNavigation } from './context/ScreenNavigationContext'
+import "./App.css";
+import {
+  ScreenNavigationProvider,
+  useScreenNavigation,
+} from "./context/ScreenNavigationContext";
 
 const ScreenNavigator = () => {
   const { currentScreen, goPrevious, goNext, previousScreen, nextScreen } =
-    useScreenNavigation()
+    useScreenNavigation();
 
-  const { Component: CurrentComponent, title } = currentScreen
+  const { Component: CurrentComponent, title } = currentScreen;
 
   return (
     <div className="app">
@@ -30,15 +33,15 @@ const ScreenNavigator = () => {
         </button>
       </nav>
     </div>
-  )
-}
+  );
+};
 
 function App() {
   return (
     <ScreenNavigationProvider>
       <ScreenNavigator />
     </ScreenNavigationProvider>
-  )
+  );
 }
 
-export default App
+export default App;

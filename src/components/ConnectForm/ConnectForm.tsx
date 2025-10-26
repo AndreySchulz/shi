@@ -5,6 +5,7 @@ import React, {
   type ClipboardEvent,
 } from "react";
 import { useFormik } from "formik";
+import { useScreenNavigation } from "../../context/ScreenNavigationContext";
 import {
   BtnIcon,
   DigitInput,
@@ -25,6 +26,8 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
   onSubmit = (code) => console.log("gameCode", code),
 }) => {
   const refs = useRef<HTMLInputElement[]>([]);
+
+  const { goTo } = useScreenNavigation();
 
   const formik = useFormik<{ otp: string[] }>({
     initialValues: { otp: Array.from({ length }, () => "") },
@@ -95,7 +98,11 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
         {formik.errors.otp && <ErrorText>{formik.errors.otp}</ErrorText>}
       </TextError>
 
-      <VerifyButton type="submit" disabled={!allFilled}>
+      <VerifyButton
+        type="submit"
+        disabled={!allFilled}
+        onClick={() => goTo("game")}
+      >
         <BtnIcon>
           <use href={`${sprite}#arrowLeft`}></use>
         </BtnIcon>

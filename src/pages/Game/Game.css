@@ -47,11 +47,11 @@
 
 @media (max-width: 600px) {
   .game {
-    padding: 2rem 1rem 1.5rem;
+    padding: 0;
     gap: 1.5rem;
   }
 
   .game__board {
-    padding: 1.75rem 1rem;
+    padding: 0;
   }
 }
