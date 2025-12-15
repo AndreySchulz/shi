@@ -13,7 +13,7 @@ const ScreenNavigator = () => {
   return (
     <div className="app">
       <CurrentComponent />
-      <nav className="navigation" aria-label="Screen navigation">
+      {/* <nav className="navigation" aria-label="Screen navigation">
         <button
           type="button"
           className="nav-button"
@@ -31,7 +31,7 @@ const ScreenNavigator = () => {
         >
           &rarr;
         </button>
-      </nav>
+      </nav> */}
     </div>
   );
 };
