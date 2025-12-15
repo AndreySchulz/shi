@@ -168,7 +168,7 @@ Error generating stack: `+a.message+`
   &:last-of-type {
     margin-right: 0;
   }
-`,mt="/assets/sprite-BcC3jZ4Z.svg",Y1=ue.div`
+`,mt="/shi/assets/sprite-BcC3jZ4Z.svg",Y1=ue.div`
   position: absolute;
   bottom: 0;
   width: 100%;
