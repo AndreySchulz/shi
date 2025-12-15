@@ -5,10 +5,9 @@ import {
 } from "./context/ScreenNavigationContext";
 
 const ScreenNavigator = () => {
-  const { currentScreen, goPrevious, goNext, previousScreen, nextScreen } =
-    useScreenNavigation();
+  const { currentScreen } = useScreenNavigation();
 
-  const { Component: CurrentComponent, title } = currentScreen;
+  const { Component: CurrentComponent } = currentScreen;
 
   return (
     <div className="app">
