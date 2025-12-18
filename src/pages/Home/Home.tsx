@@ -13,8 +13,8 @@ const Home = () => {
       <MainBlock>
         <IconButton
           type="button"
-          aria-label="Go to connect screen"
-          onClick={() => goTo("connect")}
+          aria-label="Go to host screen"
+          onClick={() => goTo("host")}
         >
           <HalfCircleBtn />
         </IconButton>
@@ -22,8 +22,8 @@ const Home = () => {
       <MainBlock>
         <IconButton
           type="button"
-          aria-label="Go to host screen"
-          onClick={() => goTo("host")}
+          aria-label="Go to connect screen"
+          onClick={() => goTo("connect")}
         >
           <RedActiveBtn />
         </IconButton>
