@@ -223,7 +223,7 @@ Error generating stack: `+a.message+`
 `,rm=ue.svg`
   width: 28px;
   height: 28px;
-`,F1=()=>{const{goTo:l}=Ka();return z.jsxs(Z1,{children:[z.jsx(im,{type:"button","aria-label":"Go to table screen",onClick:()=>l("table"),children:z.jsx(rm,{children:z.jsx("use",{href:`${mt}#Cup`})})}),z.jsx(im,{type:"button","aria-label":"Open navigation menu",children:z.jsx(rm,{children:z.jsx("use",{href:`${mt}#HamburgerMenu`})})})]})},K1=()=>{const{goTo:l}=Ka();return z.jsxs(q1,{className:"page",children:[z.jsx(F1,{}),z.jsx(tm,{children:z.jsx(nm,{type:"button","aria-label":"Go to connect screen",onClick:()=>l("connect"),children:z.jsx(G1,{})})}),z.jsx(tm,{children:z.jsx(nm,{type:"button","aria-label":"Go to host screen",onClick:()=>l("host"),children:z.jsx(Wu,{})})}),z.jsx(Q1,{})]})},J1=ue.div`
+`,F1=()=>{const{goTo:l}=Ka();return z.jsxs(Z1,{children:[z.jsx(im,{type:"button","aria-label":"Go to table screen",onClick:()=>l("table"),children:z.jsx(rm,{children:z.jsx("use",{href:`${mt}#Cup`})})}),z.jsx(im,{type:"button","aria-label":"Open navigation menu",children:z.jsx(rm,{children:z.jsx("use",{href:`${mt}#HamburgerMenu`})})})]})},K1=()=>{const{goTo:l}=Ka();return z.jsxs(q1,{className:"page",children:[z.jsx(F1,{}),z.jsx(tm,{children:z.jsx(nm,{type:"button","aria-label":"Go to host screen",onClick:()=>l("host"),children:z.jsx(G1,{})})}),z.jsx(tm,{children:z.jsx(nm,{type:"button","aria-label":"Go to connect screen",onClick:()=>l("connect"),children:z.jsx(Wu,{})})}),z.jsx(Q1,{})]})},J1=ue.div`
   position: fixed;
   top: 0;
 
