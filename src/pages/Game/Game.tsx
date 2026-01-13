@@ -193,7 +193,11 @@ const Game = () => {
               onPlayAgain={startRound}
               onReset={resetGame}
             /> */}
-            <Result timeMs={resultTimeMs ?? 0} onPlayAgain={resetGame} />
+            <Result
+              timeMs={resultTimeMs ?? 0}
+              winner={winner}
+              onPlayAgain={resetGame}
+            />
           </>
         ) : null;
       default:

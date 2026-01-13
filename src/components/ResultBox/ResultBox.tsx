@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 type ResultPhaseProps = {
   timeMs: number;
+
   onPlayAgain: React.Dispatch<React.SetStateAction<string>>;
 };
 const ResultBox = ({ timeMs, onPlayAgain }: ResultPhaseProps) => {
