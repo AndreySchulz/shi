@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ResultBox from "../../components/ResultBox/ResultBox";
 import { Container } from "./Result.styled";
 import { PLAYER_ID, type PlayerId } from "../Game/gameTypes";
@@ -20,8 +20,9 @@ const Result = ({ timeMs, winner, onPlayAgain }: ResultPhaseProps) => {
     }
   }, [acceptPlayerOne, acceptPlayerTwo]);
 
-  const randomMs =
-    timeMs > 0 ? Math.floor(Math.random() * (70 - 3 + 1)) + 3 : 0;
+  const randomMs = useMemo(() => {
+    return timeMs > 0 ? Math.floor(Math.random() * (70 - 3 + 1)) + 3 : 0;
+  }, [timeMs]);
 
   const player1Time = winner === PLAYER_ID.Player1 ? timeMs : timeMs + randomMs;
   const player2Time = winner === PLAYER_ID.Player2 ? timeMs : timeMs + randomMs;
